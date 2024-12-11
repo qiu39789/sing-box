@@ -5,7 +5,7 @@ on:
 
 jobs:
   go:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     outputs:
       version: ${{steps.go.outputs.version}}
     steps:
@@ -15,7 +15,7 @@ jobs:
           echo version=$(curl -s https://raw.githubusercontent.com/actions/go-versions/update-versions-manifest-file/versions-manifest.json | grep -oE '"version": "[0-9]{1}.[0-9]{1,}(.[0-9]{1,})?"' | head -1 | cut -d':' -f2 | sed 's/ //g; s/"//g') >> $GITHUB_OUTPUT
 
   sing-box:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     needs: go
     outputs:
       version: ${{steps.sing-box.outputs.version}}
@@ -38,7 +38,7 @@ jobs:
           echo version=$version >> $GITHUB_OUTPUT
 
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     needs:
       - go
       - sing-box
